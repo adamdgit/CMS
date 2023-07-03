@@ -1,11 +1,14 @@
 import { redirect, fail } from "@sveltejs/kit";
-import type { PageServerData } from "../$types";
+import type { PageServerLoad } from "./$types";
 import bcrypt from 'bcrypt'
 import { db } from "$lib";
 import type { Action, Actions } from "@sveltejs/kit";
 
-export const load:PageServerData = async () => {
-  //
+export const load: PageServerLoad = async ({ locals }) => {
+  // if user is logged in already, redirect to home
+  if (locals.user) {
+    throw redirect(302, '/')
+  }
 }
 
 const login:Action = async ({ cookies, request }) => {
@@ -40,7 +43,7 @@ const login:Action = async ({ cookies, request }) => {
   })
 
   // set auth token to cookies
-  cookies.set('session', authUser.authToken, {
+  cookies.set('cms-session', authUser.authToken, {
     path: '/',
     httpOnly: true,
     sameSite: 'strict',
@@ -48,7 +51,7 @@ const login:Action = async ({ cookies, request }) => {
     maxAge: 60 * 60 * 24 * 30 // 30 days as seconds
   })
 
-  throw redirect(302, '/account');
+  throw redirect(302, '/');
 }
 
 export const actions: Actions = { login };
