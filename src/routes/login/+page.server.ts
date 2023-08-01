@@ -51,7 +51,7 @@ const login:Action = async ({ cookies, request }) => {
     maxAge: 60 * 60 * 24 * 30 // 30 days as seconds
   })
 
-  throw redirect(302, '/');
+  throw redirect(302, '/account');
 }
 
 export const actions: Actions = { login };
