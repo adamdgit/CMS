@@ -10,4 +10,4 @@
 
 <p>{data.blogPost?.title}</p>
 <p>{data.blogPost?.content}</p>
-<p>{data.user.name}</p>
+<p>{data.author?.username}</p>
