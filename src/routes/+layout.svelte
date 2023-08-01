@@ -48,7 +48,7 @@
     display: flex;
     justify-content: space-between;
     background-color: #2c3135;
-    padding: 2rem;
+    padding: 3rem;
     color: #eee;
   }
 
@@ -70,6 +70,10 @@
 
   .logout:hover {
     background-color: #ccc;
+  }
+
+  main {
+    padding: 3rem;
   }
 
 </style>
