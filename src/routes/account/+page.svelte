@@ -3,5 +3,5 @@
 </script>
 
 {#if $page.data.user}
-  <h1>Welcome {$page.data.user.name}</h1>
+  posts ...
 {/if}
