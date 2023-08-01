@@ -10,7 +10,9 @@
 
 <header>
 
-  <img class="logo" src={logo} alt="logo" />
+  <a href="/">
+    <img class="logo" src={logo} alt="logo" />
+  </a>
 
   {#if !$page.data.user}
   <nav>
