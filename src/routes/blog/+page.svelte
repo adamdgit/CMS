@@ -5,24 +5,31 @@
     id: string,
     title: string,
     content: string,
-    creaated_at: Date,
+    created_at: Date,
     updated_at: Date,
     likes: number,
     author_ref: string
   }
 
   export let data;
-  const posts: postsType[] = data.posts;
+  const posts: postsType[] | undefined = data.posts;
 </script>
 
-{#each posts as post}
-<div class="posts-wrap">
-  <p>{post.title}</p>
-  <p>{post.content}</p>
-  <p>Likes: {post.likes}</p>
-  <p>Last Updated: {post.updated_at.toLocaleString("en-au", {day: '2-digit', month: 'long', year: 'numeric'})}</p>
-</div>
-{/each}
+{#if !posts}
+
+  <h2>No posts found.</h2>
+
+  {:else}
+  {#each posts as post}
+  <div class="posts-wrap">
+    <a href={`/blog/${post.id}`}>{post.title}</a>
+    <p>{post.content}</p>
+    <p>Likes: {post.likes}</p>
+    <p>Last Updated: {post.updated_at.toLocaleString("en-au", {day: '2-digit', month: 'long', year: 'numeric'})}</p>
+  </div>
+  {/each}
+
+{/if}
 
 <style>
   .posts-wrap {
