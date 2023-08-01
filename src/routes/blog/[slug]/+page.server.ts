@@ -4,7 +4,6 @@ import { db } from "$lib";
 
 export const load: PageServerLoad = async ({ params }) => {
   let id = params.slug;
-  console.log(id)
 
   // check if username exists
   const blogPost = await db.posts.findUnique({
@@ -14,6 +13,13 @@ export const load: PageServerLoad = async ({ params }) => {
   if (!blogPost) {
     return fail(400, { invalid: "Post not found" })
   }
+
+  const author = await db.users.findUnique({
+    select: { username: true },
+    where: { id: blogPost.author_ref }
+  })
+
+  console.log(author)
   
-  return ({ blogPost });
+  return ({ blogPost, author });
 }
