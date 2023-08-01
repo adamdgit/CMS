@@ -15,6 +15,8 @@
   const posts: postsType[] | undefined = data.posts;
 </script>
 
+<h1>Your posts</h1>
+
 {#if !posts}
 
   <h2>No posts found.</h2>
