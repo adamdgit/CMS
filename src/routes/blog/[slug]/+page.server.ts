@@ -14,10 +14,6 @@ export const load: PageServerLoad = async ({ params }) => {
   if (!blogPost) {
     return fail(400, { invalid: "Post not found" })
   }
-
-  const author = await db.users.findUnique({
-    where: { id: blogPost?.author_ref }
-  })
   
-  return ( { blogPost, author } );
+  return ({ blogPost });
 }
