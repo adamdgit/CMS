@@ -9,45 +9,51 @@ datasource db {
 }
 
 model Users {
-  id          String      @id @default(uuid())
-  username    String      @unique
-  password    String
-  authToken   String      @unique
-  created_at  DateTime    @default(now())
-  last_logon  DateTime    @updatedAt
-  likes       Int         @default(0)
-  roleId      Int
-  role        Roles       @relation(fields: [roleId], references: [id], onDelete: Cascade)
-  posts       Posts[]
-  comments    Comments[]
+  id         String     @id @default(uuid())
+  username   String     @unique
+  password   String
+  authToken  String     @unique
+  created_at DateTime   @default(now())
+  last_logon DateTime   @updatedAt
+  likes      Int        @default(0)
+  roleId     Int
+  role       Roles      @relation(fields: [roleId], references: [id], onDelete: Cascade)
+  posts      Posts[]
+  comments   Comments[]
 }
 
 model Posts {
-  id          String      @id @default(uuid())
-  title       String
-  content     String
-  created_at  DateTime    @default(now())
-  updated_at  DateTime    @updatedAt
-  likes       Int         @default(0)
-  comments    Comments[]
-  author_ref  String 
-  users       Users       @relation(fields: [author_ref], references: [id], onDelete: Cascade)
+  id         String     @id @default(uuid())
+  title      String
+  content    String
+  created_at DateTime   @default(now())
+  updated_at DateTime   @updatedAt
+  likes      Int        @default(0)
+  author_ref String
+  comments   Comments[]
+  users      Users      @relation(fields: [author_ref], references: [id], onDelete: Cascade)
 }
 
 model Comments {
-  id          String      @id @default(uuid())
-  comment     String
-  created_at  DateTime    @default(now())
-  updated_at  DateTime    @updatedAt
-  post_ref    String
-  author_ref  String 
-  likes       Int         @default(0)
-  posts       Posts       @relation(fields: [post_ref], references: [id], onDelete: Cascade)
-  users       Users       @relation(fields: [author_ref], references: [id], onDelete: Cascade)
+  id         String   @id @default(uuid())
+  comment    String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+  post_ref   String
+  author_ref String
+  likes      Int      @default(0)
+  posts      Posts    @relation(fields: [post_ref], references: [id], onDelete: Cascade)
+  users      Users    @relation(fields: [author_ref], references: [id], onDelete: Cascade)
 }
 
 model Roles {
-  id          Int         @id @default(autoincrement())
-  role        String      @unique
-  user        Users[]
+  id   Int     @id @default(autoincrement())
+  role String  @unique
+  user Users[]
+}
+
+model UserLikes {
+  id     Int    @id @default(autoincrement())
+  userId String
+  postId String
 }
