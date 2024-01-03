@@ -18,8 +18,6 @@ export const load: PageServerLoad = async ({ params }) => {
     select: { username: true },
     where: { id: blogPost.author_ref }
   })
-
-  console.log(author)
   
   return ({ blogPost, author });
 }
