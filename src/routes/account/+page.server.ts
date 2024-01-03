@@ -28,7 +28,7 @@ const createPost: Action = async ({ request }) => {
   }
 
   // if no errors, create post and return postid
-  const blogID = await db.posts.create({
+  const blogData = await db.posts.create({
     data: {
       title: postTitle,
       content: postBody,
@@ -37,7 +37,7 @@ const createPost: Action = async ({ request }) => {
     select: { id: true }
   })
 
-  throw redirect(303, `/blog/${blogID.id}`)
+  throw redirect(303, `/blog/${blogData.id}`)
 }
 
 export const actions: Actions = { createPost }
